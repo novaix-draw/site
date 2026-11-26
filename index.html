@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVAIX | Arte Clásico & Digital — Portafolio Oficial</title>
+    <meta name="description" content="Portafolio oficial, tienda de obras originales y comisiones personalizadas de NOVAIX. Ilustración clásica y arte digital.">
+
+    <!-- Tailwind CSS vía CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Syne (Display artístico), Space Grotesk (Subtítulos) y Plus Jakarta Sans (Lectura limpia) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons para iconografía limpia y moderna -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configuración personalizada de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        grotesk: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        nova: {
+                            bg: '#09090b',        // Fondo principal oscuro profundo
+                            card: '#121217',      // Tarjetas elevadas
+                            border: '#272732',    // Bordes sutiles
+                            lavender: '#c084fc',  // Neon-pastel lavanda
+                            mint: '#5eead4',      // Neon-pastel menta
+                            peach: '#fda4af',     // Neon-pastel durazno/rosa
+                            cyan: '#67e8f9',      // Acento cian suave
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos personalizados mínimos para efectos de brillo editorial y scrollbars */
+        body {
+            background-color: #09090b;
+            color: #f4f4f5;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(9, 9, 11, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .text-gradient-nova {
+            background: linear-gradient(135deg, #c084fc 0%, #fda4af 50%, #5eead4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-gradient-nova {
+            background: linear-gradient(135deg, #c084fc 0%, #fda4af 50%, #5eead4 100%);
+        }
+
+        .glow-card:hover {
+            box-shadow: 0 0 30px -5px rgba(192, 132, 252, 0.22);
+            border-color: rgba(192, 132, 252, 0.5);
+        }
+
+        /* Animación suave para el modal */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .animate-modal {
+            animation: fadeInScale 0.22s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-nova-lavender selection:text-zinc-950">
+
+    <!-- =====================================================================
+         ZONA DE CONFIGURACIÓN RÁPIDA PARA EL PAPÁ (EDITAR AQUÍ)
+         Puedes modificar los datos en el bloque <script> al final de este archivo
+         para cambiar: Cuenta bancaria, CLABE, WhatsApp, Correo, Patreon y Obras.
+    ====================================================================== -->
+
+    <!-- 1. HEADER / NAVEGACIÓN MINIMALISTA FIJA -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-nova-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo Tipográfico NOVAIX -->
+                <a href="#inicio" class="flex items-center gap-2 group">
+                    <span class="w-3 h-3 rounded-full bg-gradient-nova inline-block group-hover:scale-125 transition-transform"></span>
+                    <span class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight text-white">
+                        NOVAIX
+                    </span>
+                </a>
+
+                <!-- Enlaces Desktop -->
+                <nav class="hidden md:flex items-center gap-8 font-grotesk text-sm font-medium text-zinc-300">
+                    <a href="#portafolio" class="hover:text-nova-lavender transition-colors">Portafolio</a>
+                    <a href="#comisiones" class="hover:text-nova-mint transition-colors">Comisiones</a>
+                    <a href="#tienda" class="hover:text-nova-peach transition-colors">Tienda / Prints</a>
+                    <a href="#pagos" class="hover:text-nova-cyan transition-colors">Pagos & Apoyo</a>
+                    <a href="#contacto" class="px-4 py-2 rounded-full bg-white text-zinc-950 font-bold hover:bg-nova-lavender transition-colors">
+                        Contacto
+                    </a>
+                </nav>
+
+                <!-- Botón Menú Móvil -->
+                <button id="mobile-menu-btn" aria-label="Abrir menú" class="md:hidden p-2.5 rounded-xl bg-nova-card border border-nova-border text-zinc-200 hover:text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-nova-card border-b border-nova-border px-4 pt-3 pb-6 space-y-2">
+            <a href="#portafolio" class="mobile-link block px-4 py-3 rounded-xl text-base font-grotesk font-medium text-zinc-200 hover:bg-zinc-800/70">Portafolio</a>
+            <a href="#comisiones" class="mobile-link block px-4 py-3 rounded-xl text-base font-grotesk font-medium text-zinc-200 hover:bg-zinc-800/70">Comisiones</a>
+            <a href="#tienda" class="mobile-link block px-4 py-3 rounded-xl text-base font-grotesk font-medium text-zinc-200 hover:bg-zinc-800/70">Tienda / Prints</a>
+            <a href="#pagos" class="mobile-link block px-4 py-3 rounded-xl text-base font-grotesk font-medium text-zinc-200 hover:bg-zinc-800/70">Pagos & Apoyo</a>
+            <a href="#contacto" class="mobile-link block px-4 py-3 rounded-xl text-base font-grotesk font-bold text-zinc-950 bg-gradient-nova text-center mt-2">Contacto Directo</a>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION IMPACTANTE -->
+    <section id="inicio" class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
+        <!-- Destellos ambientales de fondo -->
+        <div class="absolute top-20 -left-24 w-72 h-72 sm:w-96 sm:h-96 bg-nova-lavender/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-10 -right-24 w-72 h-72 sm:w-96 sm:h-96 bg-nova-mint/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                <!-- Texto Principal -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-nova-card border border-nova-border text-xs sm:text-sm font-grotesk text-nova-mint">
+                        <span class="w-2 h-2 rounded-full bg-nova-mint animate-pulse"></span>
+                        Comisiones Abiertas • Envíos en México y Digital Global
+                    </div>
+
+                    <h1 class="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.05]">
+                        Arte donde el <span class="text-gradient-nova">trazo clásico</span> encuentra el <span class="text-white">mundo digital.</span>
+                    </h1>
+
+                    <p class="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Hola, soy <strong class="text-white font-semibold">NOVAIX</strong>. Artista visual y estudiante de Diseño de la Comunicación Gráfica. Creo ilustraciones tradicionales en <span class="text-zinc-200">grafito</span><span class="text-zinc-200">arte digital y diseño de personajes</span> llenos de expresión y color.
+                    </p>
+
+                    <!-- Etiquetas de especialidad -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-1">
+                        <span class="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">✦ Ilustración Digital</span>
+                        <span class="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">✦ Tinta & Achurado</span>
+                        <span class="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">✦ Acuarela & Grafito</span>
+                        <span class="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">✦ Character Design</span>
+                    </div>
+
+                    <!-- Botones CTA -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#portafolio" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-nova text-zinc-950 font-grotesk font-bold text-base hover:opacity-95 transition-all shadow-lg shadow-nova-lavender/20 flex items-center justify-center gap-2">
+                            <span>Ver Portafolio</span>
+                            <i data-lucide="arrow-down-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#comisiones" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-nova-card border border-nova-border text-white font-grotesk font-bold text-base hover:border-nova-lavender/60 hover:bg-zinc-900 transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-nova-lavender"></i>
+                            <span>Pedir Comisión</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Visual Destacada (Obra Insignia) -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md">
+                        <div class="absolute -inset-1 bg-gradient-nova rounded-3xl blur opacity-30"></div>
+                        <div class="relative bg-nova-card border border-nova-border rounded-3xl p-4 sm:p-5 shadow-2xl">
+                            <div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-900">
+                                <!-- Imagen de muestra (Puedes reemplazar el src con una obra real de tu hija) -->
+                                <img
+                                    src="01.jpg"
+                                    onerror="this.src='https://placehold.co/800x1000/18181b/c084fc?text=NOVAIX+ART'"
+                                    alt="Obra destacada de NOVAIX"
+                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                                >
+                                <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-zinc-950/80 backdrop-blur-md border border-white/10 text-xs font-grotesk text-nova-peach">
+                                    ★ Pieza Destacada 2026
+                                </div>
+                            </div>
+                            <div class="mt-4 flex items-center justify-between">
+                                <div>
+                                    <h2 class="font-display font-bold text-lg text-white">Ecos Cromáticos</h2>
+                                    <p class="text-xs text-zinc-400">Técnica Mixta • Digital & Tinta</p>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-nova-mint/10 border border-nova-mint/30 text-nova-mint text-xs font-grotesk font-bold">
+                                    NOVAIX Studio
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SECCIÓN DE PORTAFOLIO INTERACTIVO -->
+    <section id="portafolio" class="py-20 border-t border-nova-border/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Encabezado y Filtros -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                    <span class="text-xs font-grotesk uppercase tracking-widest text-nova-lavender font-bold">Galería Curada</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white mt-2">Portafolio Artístico</h2>
+                    <p class="text-zinc-400 mt-2 max-w-xl text-sm sm:text-base">
+                        Haz clic en cualquier ilustración para ver los detalles de su técnica, materiales y disponibilidad.
+                    </p>
+                </div>
+
+                <!-- Botones de Filtro -->
+                <div id="portfolio-filters" class="flex flex-wrap gap-2">
+                    <button data-filter="all" class="filter-btn active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-grotesk font-bold bg-white text-zinc-950 transition-all">
+                        Todo
+                    </button>
+                    <button data-filter="digital" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-grotesk font-medium bg-nova-card border border-nova-border text-zinc-300 hover:border-nova-lavender transition-all">
+                        Arte Digital
+                    </button>
+                    <button data-filter="clasica" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-grotesk font-medium bg-nova-card border border-nova-border text-zinc-300 hover:border-nova-mint transition-all">
+                        Técnica Clásica
+                    </button>
+                    <button data-filter="personajes" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-grotesk font-medium bg-nova-card border border-nova-border text-zinc-300 hover:border-nova-peach transition-all">
+                        Diseño de Personajes
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid Responsivo del Portafolio (Se llena dinámicamente desde JS para fácil edición) -->
+            <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Las tarjetas se renderizan con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SECCIÓN DE COMISIONES (TRABAJOS A PEDIDO) -->
+    <section id="comisiones" class="py-20 bg-zinc-950/60 border-t border-nova-border/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-grotesk uppercase tracking-widest text-nova-mint font-bold">Arte Personalizado</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white mt-2">Comisiones & Encargos</h2>
+                <p class="text-zinc-400 mt-3 text-sm sm:text-base">
+                    ¿Quieres un retrato, un personaje original, un regalo especial en acuarela o una ilustración digital? Elige un paquete y cotiza tu idea al instante.
+                </p>
+            </div>
+
+            <!-- Tarjetas de Precios en MXN -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Paquete 1 -->
+                <div class="bg-nova-card border border-nova-border rounded-3xl p-6 flex flex-col justify-between glow-card transition-all">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-zinc-800 text-zinc-300 text-xs font-grotesk">Digital / Clásico</span>
+                            <i data-lucide="pen-tool" class="w-5 h-5 text-nova-cyan"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Boceto / Lineart</h3>
+                        <div class="mt-3 flex items-baseline gap-1">
+                            <span class="font-display font-extrabold text-3xl text-nova-cyan">$250</span>
+                            <span class="text-xs text-zinc-400 font-grotesk">MXN</span>
+                        </div>
+                        <p class="text-xs text-zinc-400 mt-1">Entrega estimada: 2 a 3 días</p>
+                        <ul class="mt-5 space-y-2.5 text-sm text-zinc-300">
+                            <li class="flex items-start gap-2"><span class="text-nova-cyan">✓</span> Trazo limpio en tinta o digital</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-cyan">✓</span> Busto o medio cuerpo</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-cyan">✓</span> 1 ronda de ajustes en boceto</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-cyan">✓</span> Archivo PNG/JPG alta resolución</li>
+                        </ul>
+                    </div>
+                    <button onclick="seleccionarPaquete('Boceto / Lineart ($250 MXN)')" class="mt-6 w-full py-3 rounded-xl bg-zinc-900 border border-nova-border hover:border-nova-cyan text-white font-grotesk font-bold text-sm transition-colors">
+                        Elegir este paquete
+                    </button>
+                </div>
+
+                <!-- Paquete 2 (Más Popular) -->
+                <div class="bg-nova-card border-2 border-nova-lavender rounded-3xl p-6 flex flex-col justify-between relative shadow-xl shadow-nova-lavender/10">
+                    <div class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-nova text-zinc-950 text-xs font-grotesk font-extrabold">
+                        ★ Más Pedido
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-nova-lavender/15 text-nova-lavender text-xs font-grotesk">100% Digital</span>
+                            <i data-lucide="palette" class="w-5 h-5 text-nova-lavender"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Ilustración Digital a Color</h3>
+                        <div class="mt-3 flex items-baseline gap-1">
+                            <span class="font-display font-extrabold text-3xl text-nova-lavender">$550</span>
+                            <span class="text-xs text-zinc-400 font-grotesk">MXN</span>
+                        </div>
+                        <p class="text-xs text-zinc-400 mt-1">Entrega estimada: 4 a 6 días</p>
+                        <ul class="mt-5 space-y-2.5 text-sm text-zinc-300">
+                            <li class="flex items-start gap-2"><span class="text-nova-lavender">✓</span> Color completo, luces y sombras</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-lavender">✓</span> Fondo atmosférico sencillo incluido</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-lavender">✓</span> 2 revisiones de avance</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-lavender">✓</span> Formato listo para imprimir (300 DPI)</li>
+                        </ul>
+                    </div>
+                    <button onclick="seleccionarPaquete('Ilustración Digital a Color ($550 MXN)')" class="mt-6 w-full py-3 rounded-xl bg-gradient-nova text-zinc-950 font-grotesk font-bold text-sm hover:opacity-95 transition-opacity">
+                        Elegir este paquete
+                    </button>
+                </div>
+
+                <!-- Paquete 3 -->
+                <div class="bg-nova-card border border-nova-border rounded-3xl p-6 flex flex-col justify-between glow-card transition-all">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-nova-mint/15 text-nova-mint text-xs font-grotesk">Obra Física</span>
+                            <i data-lucide="brush" class="w-5 h-5 text-nova-mint"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Obra Tradicional en Papel</h3>
+                        <div class="mt-3 flex items-baseline gap-1">
+                            <span class="font-display font-extrabold text-3xl text-nova-mint">$750</span>
+                            <span class="text-xs text-zinc-400 font-grotesk">MXN</span>
+                        </div>
+                        <p class="text-xs text-zinc-400 mt-1">Entrega estimada: 5 a 8 días + envío</p>
+                        <ul class="mt-5 space-y-2.5 text-sm text-zinc-300">
+                            <li class="flex items-start gap-2"><span class="text-nova-mint">✓</span> Acuarela, grafito o tinta en papel algodón</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-mint">✓</span> Pieza física original firmada</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-mint">✓</span> Escaneo digital de regalo</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-mint">✓</span> Entrega CDMX o envío nacional</li>
+                        </ul>
+                    </div>
+                    <button onclick="seleccionarPaquete('Obra Tradicional en Papel ($750 MXN)')" class="mt-6 w-full py-3 rounded-xl bg-zinc-900 border border-nova-border hover:border-nova-mint text-white font-grotesk font-bold text-sm transition-colors">
+                        Elegir este paquete
+                    </button>
+                </div>
+
+                <!-- Paquete 4 -->
+                <div class="bg-nova-card border border-nova-border rounded-3xl p-6 flex flex-col justify-between glow-card transition-all">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-nova-peach/15 text-nova-peach text-xs font-grotesk">Concept Art</span>
+                            <i data-lucide="user-check" class="w-5 h-5 text-nova-peach"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Diseño de Personaje</h3>
+                        <div class="mt-3 flex items-baseline gap-1">
+                            <span class="font-display font-extrabold text-3xl text-nova-peach">$900</span>
+                            <span class="text-xs text-zinc-400 font-grotesk">MXN</span>
+                        </div>
+                        <p class="text-xs text-zinc-400 mt-1">Entrega estimada: 5 a 10 días dependiendo de la complejidad del trabajo</p>
+                        <ul class="mt-5 space-y-2.5 text-sm text-zinc-300">
+                            <li class="flex items-start gap-2"><span class="text-nova-peach">✓</span> Cuerpo completo + 2 expresiones</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-peach">✓</span> Paleta de color y detalles de vestuario</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-peach">✓</span> Hoja de referencia (Character Sheet)</li>
+                            <li class="flex items-start gap-2"><span class="text-nova-peach">✓</span> Ideal para creadores, libros o juegos</li>
+                        </ul>
+                    </div>
+                    <button onclick="seleccionarPaquete('Diseño de Personaje ($900 MXN)')" class="mt-6 w-full py-3 rounded-xl bg-zinc-900 border border-nova-border hover:border-nova-peach text-white font-grotesk font-bold text-sm transition-colors">
+                        Elegir este paquete
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calculadora / Formulario Interactivo de Solicitud -->
+            <div id="formulario-comision" class="max-w-4xl mx-auto bg-nova-card border border-nova-border rounded-3xl p-6 sm:p-10 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-nova-border">
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-white">Generador de Pedido de Comisión</h3>
+                        <p class="text-sm text-zinc-400 mt-1">Personaliza tu encargo y envía el mensaje listo por WhatsApp, correo o cópialo.</p>
+                    </div>
+                    <div class="px-4 py-2 rounded-2xl bg-zinc-900 border border-nova-border text-right">
+                        <span class="text-xs text-zinc-400 block">Estimado inicial</span>
+                        <span id="precio-estimado" class="font-display font-extrabold text-xl text-nova-mint">$550 MXN</span>
+                    </div>
+                </div>
+
+                <form id="commission-form" class="mt-6 space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <!-- Nombre del cliente -->
+                        <div>
+                            <label for="client-name" class="block text-xs font-grotesk uppercase tracking-wider text-zinc-400 mb-2">Tu Nombre o Apodo *</label>
+                            <input type="text" id="client-name" required placeholder="Ej. Camila / @camila_art" class="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-nova-border text-white placeholder-zinc-500 focus:outline-none focus:border-nova-lavender transition-colors">
+                        </div>
+
+                        <!-- Tipo de Paquete -->
+                        <div>
+                            <label for="commission-package" class="block text-xs font-grotesk uppercase tracking-wider text-zinc-400 mb-2">Tipo de Trabajo</label>
+                            <select id="commission-package" class="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-nova-border text-white focus:outline-none focus:border-nova-lavender transition-colors">
+                                <option value="Boceto / Lineart ($250 MXN)" data-price="250">Boceto / Lineart — $250 MXN</option>
+                                <option value="Ilustración Digital a Color ($550 MXN)" data-price="550" selected>Ilustración Digital a Color — $550 MXN</option>
+                                <option value="Obra Tradicional en Papel ($750 MXN)" data-price="750">Obra Tradicional en Papel — $750 MXN</option>
+                                <option value="Diseño de Personaje ($900 MXN)" data-price="900">Diseño de Personaje — $900 MXN</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <!-- Estilo preferido -->
+                        <div>
+                            <label for="commission-style" class="block text-xs font-grotesk uppercase tracking-wider text-zinc-400 mb-2">Estilo / Técnica</label>
+                            <select id="commission-style" class="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-nova-border text-white focus:outline-none focus:border-nova-lavender transition-colors">
+                                <option value="Digital Colorido / Editorial">Digital Colorido / Editorial</option>
+                                <option value="Tinta Negra y Achurado Clásico">Tinta Negra y Achurado Clásico</option>
+                                <option value="Acuarela y Lápices de Color">Acuarela y Lápices de Color</option>
+                                <option value="Grafito / Carboncillo Realista">Grafito / Carboncillo Realista</option>
+                            </select>
+                        </div>
+
+                        <!-- Extra personaje adicional -->
+                        <div>
+                            <label for="extra-character" class="block text-xs font-grotesk uppercase tracking-wider text-zinc-400 mb-2">Personajes en la escena</label>
+                            <select id="extra-character" class="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-nova-border text-white focus:outline-none focus:border-nova-lavender transition-colors">
+                                <option value="1 personaje (Incluido)" data-extra="0">1 personaje (Incluido en base)</option>
+                                <option value="2 personajes (+$200 MXN)" data-extra="200">2 personajes (+$200 MXN)</option>
+                                <option value="Fondo detallado (+$150 MXN)" data-extra="150">1 personaje + Fondo complejo (+$150 MXN)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Descripción de la idea -->
+                    <div>
+                        <label for="commission-desc" class="block text-xs font-grotesk uppercase tracking-wider text-zinc-400 mb-2">Describe tu idea (pose, colores, referencias, fecha ideal) *</label>
+                        <textarea id="commission-desc" rows="3" required placeholder="Cuéntame qué te gustaría que dibuje: colores favoritos, expresión, si es para regalo, etc." class="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-nova-border text-white placeholder-zinc-500 focus:outline-none focus:border-nova-lavender transition-colors"></textarea>
+                    </div>
+
+                    <!-- Vista previa del mensaje generado -->
+                    <div class="bg-zinc-900/90 border border-nova-border rounded-2xl p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-grotesk text-nova-lavender font-bold">Vista previa de tu solicitud:</span>
+                            <button type="button" onclick="copiarSolicitud()" class="text-xs font-grotesk text-zinc-300 hover:text-white flex items-center gap-1 bg-zinc-800 px-3 py-1.5 rounded-lg">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar texto
+                            </button>
+                        </div>
+                        <p id="message-preview" class="text-xs sm:text-sm text-zinc-300 font-mono whitespace-pre-line leading-relaxed"></p>
+                    </div>
+
+                    <!-- Botones de Envío -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <button type="button" onclick="enviarWhatsApp()" class="py-4 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-grotesk font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition-all">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            <span>Enviar por WhatsApp</span>
+                        </button>
+                        <button type="button" onclick="enviarCorreo()" class="py-4 px-6 rounded-2xl bg-white hover:bg-nova-lavender text-zinc-950 font-grotesk font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition-all">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            <span>Enviar por Correo</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SECCIÓN DE TIENDA / OBRAS ORIGINALES EN VENTA -->
+    <section id="tienda" class="py-20 border-t border-nova-border/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+                <div>
+                    <span class="text-xs font-grotesk uppercase tracking-widest text-nova-peach font-bold">Colección Disponible</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white mt-2">Tienda & Obras Originales</h2>
+                    <p class="text-zinc-400 mt-2 max-w-2xl text-sm sm:text-base">
+                        Adquiere piezas físicas únicas hechas a mano o prints de edición firmada. Al apartar una obra, puedes realizar tu transferencia y enviar tu comprobante.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grid de Productos de la Tienda (Renderizado desde JS) -->
+            <div id="shop-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Tarjetas de tienda generadas con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SECCIÓN DE MÉTODOS DE PAGO Y APOYO (PATREON + TRANSFERENCIA) -->
+    <section id="pagos" class="py-20 bg-zinc-950/70 border-t border-nova-border/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-grotesk uppercase tracking-widest text-nova-cyan font-bold">Transparencia & Comunidad</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white mt-2">Pagos & Apoyo al Arte</h2>
+                <p class="text-zinc-400 mt-3 text-sm sm:text-base">
+                    Puedes pagar tus comisiones u obras mediante transferencia bancaria directa (SPEI) o apoyar mi proceso creativo mensualmente en Patreon.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- BLOQUE A: TRANSFERENCIA BANCARIA (SPEI - MÉXICO) -->
+                <div class="lg:col-span-7 bg-nova-card border border-nova-border rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-4 mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-nova-mint/15 border border-nova-mint/30 flex items-center justify-center text-nova-mint">
+                                    <i data-lucide="landmark" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-display font-bold text-xl sm:text-2xl text-white">Transferencia Bancaria (SPEI)</h3>
+                                    <p class="text-xs text-zinc-400">Pagos directos en Pesos Mexicanos (MXN)</p>
+                                </div>
+                            </div>
+                            <span class="hidden sm:inline-block px-3 py-1 rounded-full bg-zinc-900 border border-nova-border text-xs font-grotesk text-nova-mint">
+                                Sin comisiones extra
+                            </span>
+                        </div>
+
+                        <!-- Tarjeta con Datos Bancarios Editables -->
+                        <div class="space-y-4 bg-zinc-900/90 border border-nova-border rounded-2xl p-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <span class="text-xs text-zinc-500 font-grotesk uppercase">Banco / Institución</span>
+                                    <p id="bank-name" class="text-white font-bold text-base mt-0.5">BBVA México (Editar)</p>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-zinc-500 font-grotesk uppercase">Titular de la Cuenta</span>
+                                    <p id="bank-holder" class="text-white font-bold text-base mt-0.5">Nombre de Titular (Editar)</p>
+                                </div>
+                            </div>
+
+                            <!-- CLABE Interbancaria con Botón Copiar -->
+                            <div class="pt-3 border-t border-zinc-800">
+                                <span class="text-xs text-zinc-500 font-grotesk uppercase">CLABE Interbancaria (18 dígitos)</span>
+                                <div class="mt-1.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-zinc-950 border border-zinc-800 rounded-xl p-3">
+                                    <code id="bank-clabe" class="font-mono text-base sm:text-lg text-nova-mint tracking-wider font-bold select-all">012180000000000000</code>
+                                    <button type="button" onclick="copiarDatoBancario('bank-clabe', 'CLABE Interbancaria')" class="px-4 py-2 rounded-lg bg-nova-mint text-zinc-950 font-grotesk font-bold text-xs hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shrink-0">
+                                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                        <span>Copiar CLABE</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Número de Tarjeta / Cuenta -->
+                            <div class="pt-2">
+                                <span class="text-xs text-zinc-500 font-grotesk uppercase">Número de Tarjeta / Cuenta</span>
+                                <div class="mt-1.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-zinc-950 border border-zinc-800 rounded-xl p-3">
+                                    <code id="bank-card" class="font-mono text-sm sm:text-base text-zinc-200 tracking-wider select-all">4152 3100 0000 0000</code>
+                                    <button type="button" onclick="copiarDatoBancario('bank-card', 'Número de Tarjeta')" class="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white font-grotesk font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shrink-0">
+                                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                        <span>Copiar Tarjeta</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nota de Instrucciones -->
+                    <div class="mt-6 p-4 rounded-2xl bg-nova-lavender/10 border border-nova-lavender/30 flex items-start gap-3">
+                        <i data-lucide="info" class="w-5 h-5 text-nova-lavender shrink-0 mt-0.5"></i>
+                        <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">
+                            <strong class="text-white">Instrucción importante:</strong> Al transferir, coloca tu nombre en el concepto y <strong class="text-nova-lavender">envía tu comprobante con tu nombre o concepto</strong> por WhatsApp o Instagram para confirmar tu pedido o apartar tu obra.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- BLOQUE B: PATREON (COMUNIDAD Y APOYO MENSUAL) -->
+                <div class="lg:col-span-5 relative rounded-3xl p-[1px] bg-gradient-nova">
+                    <div class="bg-nova-card rounded-3xl p-6 sm:p-8 h-full flex flex-col justify-between">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-nova-peach/15 text-nova-peach text-xs font-grotesk font-bold mb-5">
+                                <i data-lucide="heart" class="w-3.5 h-3.5 fill-current"></i>
+                                Comunidad Exclusiva
+                            </div>
+
+                            <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white">
+                                Apoya mi arte en Patreon
+                            </h3>
+
+                            <p class="text-zinc-300 text-sm sm:text-base mt-3 leading-relaxed">
+                                Únete a mi espacio creativo para ver el detrás de cámaras de mis proyectos universitarios y personales: bocetos inéditos, timelapses de proceso, wallpapers mensuales y acceso anticipado a obras originales.
+                            </p>
+
+                            <ul class="mt-6 space-y-3 text-sm text-zinc-300">
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-6 h-6 rounded-full bg-nova-peach/20 text-nova-peach flex items-center justify-center text-xs">✦</span>
+                                    Procesos en video (Timelapses digital y acuarela)
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-6 h-6 rounded-full bg-nova-lavender/20 text-nova-lavender flex items-center justify-center text-xs">✦</span>
+                                    Fondos de pantalla descargables en alta calidad
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-6 h-6 rounded-full bg-nova-mint/20 text-nova-mint flex items-center justify-center text-xs">✦</span>
+                                    Descuentos especiales en comisiones y prints
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-nova-border">
+                            <a id="patreon-cta-link" href="https://www.patreon.com/" target="_blank" rel="noopener noreferrer" class="w-full py-4 px-6 rounded-2xl bg-gradient-nova text-zinc-950 font-grotesk font-extrabold text-base flex items-center justify-center gap-2 hover:opacity-95 transition-opacity shadow-lg shadow-nova-peach/20">
+                                <span>Visitar mi Patreon</span>
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                            <p class="text-center text-xs text-zinc-500 mt-3">
+                                ¡Gracias por impulsar el arte independiente!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER MODERNO Y CONTACTO -->
+    <footer id="contacto" class="py-16 border-t border-nova-border bg-nova-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-12 border-b border-nova-border">
+                <div>
+                    <a href="#inicio" class="font-display font-extrabold text-3xl text-white tracking-tight flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-gradient-nova"></span>
+                        NOVAIX
+                    </a>
+                    <p class="text-zinc-400 text-sm mt-2 max-w-md">
+                        Ilustración Clásica, Arte Digital y Diseño de Personajes. Ciudad de México.
+                    </p>
+                </div>
+
+                <!-- Enlaces a Redes Sociales (Configurables en el JS) -->
+                <div class="flex flex-wrap gap-3">
+                    <a id="social-instagram" href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-nova-card border border-nova-border hover:border-nova-peach text-zinc-200 hover:text-white font-grotesk text-sm flex items-center gap-2 transition-all">
+                        <i data-lucide="instagram" class="w-4 h-4 text-nova-peach"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a id="social-tiktok" href="https://tiktok.com/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-nova-card border border-nova-border hover:border-nova-cyan text-zinc-200 hover:text-white font-grotesk text-sm flex items-center gap-2 transition-all">
+                        <i data-lucide="music-2" class="w-4 h-4 text-nova-cyan"></i>
+                        <span>TikTok</span>
+                    </a>
+                    <a id="social-patreon" href="https://patreon.com/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-nova-card border border-nova-border hover:border-nova-lavender text-zinc-200 hover:text-white font-grotesk text-sm flex items-center gap-2 transition-all">
+                        <i data-lucide="heart" class="w-4 h-4 text-nova-lavender"></i>
+                        <span>Patreon</span>
+                    </a>
+                    <a id="social-behance" href="https://behance.net/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-nova-card border border-nova-border hover:border-nova-mint text-zinc-200 hover:text-white font-grotesk text-sm flex items-center gap-2 transition-all">
+                        <i data-lucide="layers" class="w-4 h-4 text-nova-mint"></i>
+                        <span>Behance / ArtStation</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+                <p>© <span id="current-year">2026</span> NOVAIX Art Studio. Todos los derechos reservados.</p>
+                <p>Hecho con pasión por el dibujo clásico & digital.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =====================================================================
+         MODAL / LIGHTBOX PARA VER OBRAS EN GRANDE
+    ====================================================================== -->
+    <div id="artwork-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md">
+        <div class="relative w-full max-w-4xl bg-nova-card border border-nova-border rounded-3xl overflow-hidden shadow-2xl animate-modal max-h-[92vh] flex flex-col md:flex-row">
+            <!-- Botón Cerrar -->
+            <button onclick="cerrarModal()" aria-label="Cerrar vista previa" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-zinc-950/80 border border-white/10 text-white hover:bg-nova-lavender hover:text-zinc-950 flex items-center justify-center transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Imagen en Grande -->
+            <div class="md:w-3/5 bg-zinc-950 flex items-center justify-center overflow-hidden max-h-[50vh] md:max-h-[85vh]">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-contain">
+            </div>
+
+            <!-- Detalles de la Obra -->
+            <div class="md:w-2/5 p-6 sm:p-8 flex flex-col justify-between overflow-y-auto">
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span id="modal-category" class="px-3 py-1 rounded-full bg-nova-lavender/15 text-nova-lavender text-xs font-grotesk font-bold"></span>
+                        <span id="modal-status" class="px-3 py-1 rounded-full text-xs font-grotesk font-bold"></span>
+                    </div>
+
+                    <h3 id="modal-title" class="font-display font-extrabold text-2xl sm:text-3xl text-white"></h3>
+                    <p id="modal-tech" class="text-xs font-grotesk text-nova-mint mt-1"></p>
+
+                    <div class="mt-5 pt-5 border-t border-nova-border">
+                        <h4 class="text-xs font-grotesk uppercase tracking-wider text-zinc-500 mb-2">Historia & Proceso</h4>
+                        <p id="modal-story" class="text-sm text-zinc-300 leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-5 border-t border-nova-border space-y-3">
+                    <button id="modal-interest-btn" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-nova text-zinc-950 font-grotesk font-extrabold text-sm flex items-center justify-center gap-2 hover:opacity-95 transition-opacity">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Me interesa esta obra / Pedir algo similar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         NOTIFICACIÓN FLOTANTE (TOAST - REEMPLAZA ALERTAS DEL NAVEGADOR)
+    ====================================================================== -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-zinc-900 border border-nova-mint/50 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-nova-mint"></span>
+            <span id="toast-message" class="text-sm font-grotesk font-medium">Copiado al portapapeles</span>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         JAVASCRIPT PRINCIPAL (FÁCIL DE EDITAR EN ESPAÑOL)
+    ====================================================================== -->
+    <script>
+        /* ===================================================================
+           1. CONFIGURACIÓN PERSONAL DE NOVAIX (EDITA ESTOS VALORES)
+        =================================================================== */
+        const CONFIG_NOVAIX = {
+            // Datos de Contacto para pedidos (sin espacios ni signos en WhatsApp, incluir 52 para México)
+            whatsappNumero: "9984263330", 
+            correoContacto: "novaix.art@gmail.com",
+
+            // Datos Bancarios para Transferencia SPEI (Se muestran automáticamente en la página)
+            banco: "Nu",
+            titularCuenta: "Itzel Xahil Pérez",
+            clabeInterbancaria: "638180010001176370",
+            numeroTarjeta: "5101 2591 2412 3471",
+
+            // Enlaces a Redes Sociales y Patreon
+            urlPatreon: "https://www.patreon.com/",
+            urlInstagram: "https://www.instagram.com/novaix_draws07",
+            urlTiktok: "https://www.tiktok.com/"
+        };
+
+        /* ===================================================================
+           2. CATÁLOGO DEL PORTAFOLIO (AGREGA O EDITA SUS DIBUJOS AQUÍ)
+           Categorías válidas: "digital", "clasica", "personajes"
+           Estados válidos: "Disponible", "Vendido", "Encargo"
+        =================================================================== */
+        const OBRAS_PORTAFOLIO = [
+            {
+                id: 1,
+                titulo: "Lorenzo & Rachel Waterman",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "01.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 2,
+                titulo: "Lain Iwakura",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "02.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 3,
+                titulo: "Batter & Judge",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "03.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 4,
+                titulo: "Vash Stampede",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "04.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 5,
+                titulo: "Athena Asamiya",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "05.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 6,
+                titulo: "The Courier",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "06.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 7,
+                titulo: "Lady Oscar",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "07.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 8,
+                titulo: "Sebastian Solace I",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "08.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 9,
+                titulo: "Sebastian Solace II",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "09.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 10,
+                titulo: "Kirby Warp Star",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "10.jpg",
+                historia: "Exploración cromática sobre la introspección juvenil, combinando iluminación neón-pastel con texturas de pincel seco."
+            },
+            {
+                id: 11,
+                titulo: "Morrigan Aensland",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "11.jpg",
+                historia: "Dibujo tradicional a mano, escaneado en alta resolución."
+            },
+            {
+                id: 12,
+                titulo: "Batter",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "12.jpg",
+                historia: "Dibujo tradicional a mano, escaneado en alta resolución."
+            },
+                        {
+                id: 14,
+                titulo: "Batter",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Procreate & Clip Studio • 3500 x 4500 px",
+                estado: "Disponible",
+                imagen: "14.jpg",
+                historia: "Dibujo tradicional a mano, escaneado en alta resolución."
+            },
+            {
+                id: 20,
+                titulo: "Estudio Botánico en Tinta",
+                categoria: "clasica",
+                categoriaLabel: "Técnica Clásica",
+                tecnica: "Estilógrafo y tinta china sobre papel algodón • 21 x 29.7 cm",
+                estado: "Disponible",
+                imagen: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=800&q=80",
+                historia: "Dibujo de observación directa realizado con achurado cruzado tradicional. Pieza física original lista para enmarcar."
+            },
+            {
+                id: 30,
+                titulo: "Valkiria Urbana (OC)",
+                categoria: "personajes",
+                categoriaLabel: "Diseño de Personajes",
+                tecnica: "Arte Digital • Character Sheet 4000 x 3000 px",
+                estado: "Encargo",
+                imagen: "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?auto=format&fit=crop&w=800&q=80",
+                historia: "Diseño de personaje original inspirado en moda streetwear de la Ciudad de México y estética cyberpunk suave."
+            },
+            {
+                id: 40,
+                titulo: "Reflejos en Acuarela",
+                categoria: "clasica",
+                categoriaLabel: "Técnica Clásica",
+                tecnica: "Acuarela y grafito 4B sobre papel Fabriano 300g • 25 x 35 cm",
+                estado: "Vendido",
+                imagen: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80",
+                historia: "Veladuras transparentes de acuarela cálida y fría trabajando la luz natural y la expresión del retrato clásico."
+            },
+            {
+                id: 50,
+                titulo: "Sueño Sintético",
+                categoria: "digital",
+                categoriaLabel: "Arte Digital",
+                tecnica: "Ilustración Digital • 3000 x 3000 px (300 DPI)",
+                estado: "Disponible",
+                imagen: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=800&q=80",
+                historia: "Composición editorial experimentando con formas fluidas, contraste alto y atmósfera onírica."
+            },
+            {
+                id: 60,
+                titulo: "Guardiana del Bosque",
+                categoria: "personajes",
+                categoriaLabel: "Diseño de Personajes",
+                tecnica: "Técnica Mixta (Tinta tradicional + Color digital)",
+                estado: "Encargo",
+                imagen: "https://images.unsplash.com/photo-1580136579312-94651dfd596d?auto=format&fit=crop&w=800&q=80",
+                historia: "Fusión de dibujo tradicional entintado a mano, escaneado en alta resolución y coloreado digitalmente."
+            }
+        ];
+
+        /* ===================================================================
+           3. CATÁLOGO DE TIENDA / PRINTS EN VENTA (EDITA PRECIOS Y OBRAS)
+        =================================================================== */
+        const PRODUCTOS_TIENDA = [
+            {
+                id: "prod-1",
+                titulo: "Original: Estudio Botánico en Tinta",
+                tipo: "Obra Física Única (1/1)",
+                medidas: "21 x 29.7 cm • Papel Algodón 300g",
+                precio: 650,
+                imagen: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: "prod-2",
+                titulo: "Art Print: Nebulosa Interior",
+                tipo: "Print Firmado Edición Limitada",
+                medidas: "Tabloide (28 x 43 cm) • Papel Couché Mate",
+                precio: 220,
+                imagen: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: "prod-3",
+                titulo: "Pack de 3 Mini-Prints + Stickers",
+                tipo: "Colección NOVAIX Studio",
+                medidas: "Postales A5 + Stickers vinil holográfico",
+                precio: 180,
+                imagen: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        /* ===================================================================
+           4. LÓGICA DE RENDERIZADO E INTERACTIVIDAD
+        =================================================================== */
+        document.addEventListener("DOMContentLoaded", () => {
+            // Inicializar iconos Lucide
+            lucide.createIcons();
+
+            // Cargar datos bancarios y redes desde CONFIG_NOVAIX
+            cargarConfiguracion();
+
+            // Renderizar Portafolio inicial y Tienda
+            renderizarPortafolio("all");
+            renderizarTienda();
+
+            // Inicializar vista previa del formulario de comisiones
+            actualizarCotizacion();
+
+            // Configurar menú móvil
+            const mobileBtn = document.getElementById("mobile-menu-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+            mobileBtn.addEventListener("click", () => {
+                mobileMenu.classList.toggle("hidden");
+            });
+
+            document.querySelectorAll(".mobile-link").forEach(link => {
+                link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+            });
+
+            // Eventos de filtros del portafolio
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".filter-btn").forEach(b => {
+                        b.classList.remove("bg-white", "text-zinc-950", "font-bold");
+                        b.classList.add("bg-nova-card", "border", "border-nova-border", "text-zinc-300", "font-medium");
+                    });
+                    btn.classList.remove("bg-nova-card", "border", "border-nova-border", "text-zinc-300", "font-medium");
+                    btn.classList.add("bg-white", "text-zinc-950", "font-bold");
+
+                    renderizarPortafolio(btn.getAttribute("data-filter"));
+                });
+            });
+
+            // Escuchar cambios en el formulario de comisiones
+            ["client-name", "commission-package", "commission-style", "extra-character", "commission-desc"].forEach(id => {
+                document.getElementById(id).addEventListener("input", actualizarCotizacion);
+                document.getElementById(id).addEventListener("change", actualizarCotizacion);
+            });
+
+            // Cerrar modal con tecla Escape o clic fuera
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") cerrarModal();
+            });
+            document.getElementById("artwork-modal").addEventListener("click", (e) => {
+                if (e.target.id === "artwork-modal") cerrarModal();
+            });
+        });
+
+        function cargarConfiguracion() {
+            document.getElementById("bank-name").textContent = CONFIG_NOVAIX.banco;
+            document.getElementById("bank-holder").textContent = CONFIG_NOVAIX.titularCuenta;
+            document.getElementById("bank-clabe").textContent = CONFIG_NOVAIX.clabeInterbancaria;
+            document.getElementById("bank-card").textContent = CONFIG_NOVAIX.numeroTarjeta;
+
+            document.getElementById("patreon-cta-link").href = CONFIG_NOVAIX.urlPatreon;
+            document.getElementById("social-patreon").href = CONFIG_NOVAIX.urlPatreon;
+            document.getElementById("social-instagram").href = CONFIG_NOVAIX.urlInstagram;
+            document.getElementById("social-tiktok").href = CONFIG_NOVAIX.urlTiktok;
+            document.getElementById("social-behance").href = CONFIG_NOVAIX.urlBehance;
+            document.getElementById("current-year").textContent = new Date().getFullYear();
+        }
+
+        function obtenerEstiloEstado(estado) {
+            if (estado === "Disponible") return "bg-nova-mint/15 text-nova-mint border border-nova-mint/30";
+            if (estado === "Vendido") return "bg-rose-500/15 text-rose-300 border border-rose-500/30";
+            return "bg-nova-lavender/15 text-nova-lavender border border-nova-lavender/30";
+        }
+
+        function renderizarPortafolio(filtro) {
+            const grid = document.getElementById("portfolio-grid");
+            grid.innerHTML = "";
+
+            const obrasFiltradas = filtro === "all"
+                ? OBRAS_PORTAFOLIO
+                : OBRAS_PORTAFOLIO.filter(obra => obra.categoria === filtro);
+
+            obrasFiltradas.forEach(obra => {
+                const badgeClass = obtenerEstiloEstado(obra.estado);
+                const card = document.createElement("article");
+                card.className = "group bg-nova-card border border-nova-border rounded-3xl overflow-hidden glow-card transition-all duration-300 cursor-pointer flex flex-col justify-between";
+                card.onclick = () => abrirModal(obra);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative aspect-[4/5] bg-zinc-900 overflow-hidden">
+                            <img
+                                src="${obra.imagen}"
+                                onerror="this.src='https://placehold.co/800x1000/18181b/c084fc?text=${encodeURIComponent(obra.titulo)}'"
+                                alt="${obra.titulo}"
+                                loading="lazy"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-5">
+                                <span class="px-4 py-2 rounded-xl bg-white/95 text-zinc-950 font-grotesk font-bold text-xs flex items-center gap-1.5">
+                                    <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Ver detalles
+                                </span>
+                            </div>
+                            <span class="absolute top-3.5 right-3.5 px-3 py-1 rounded-full backdrop-blur-md text-xs font-grotesk font-bold ${badgeClass}">
+                                ${obra.estado}
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-grotesk text-nova-lavender font-semibold">${obra.categoriaLabel}</span>
+                            <h3 class="font-display font-bold text-xl text-white mt-1 group-hover:text-nova-lavender transition-colors">${obra.titulo}</h3>
+                            <p class="text-xs text-zinc-400 mt-1.5">${obra.tecnica}</p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        function renderizarTienda() {
+            const grid = document.getElementById("shop-grid");
+            grid.innerHTML = "";
+
+            PRODUCTOS_TIENDA.forEach(prod => {
+                const card = document.createElement("div");
+                card.className = "bg-nova-card border border-nova-border rounded-3xl overflow-hidden flex flex-col justify-between glow-card transition-all";
+                card.innerHTML = `
+                    <div>
+                        <div class="relative aspect-square bg-zinc-900 overflow-hidden">
+                            <img
+                                src="${prod.imagen}"
+                                onerror="this.src='https://placehold.co/800x800/18181b/fda4af?text=NOVAIX+STORE'"
+                                alt="${prod.titulo}"
+                                loading="lazy"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            >
+                            <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-zinc-950/80 backdrop-blur-md border border-white/10 text-xs font-grotesk text-nova-peach font-bold">
+                                ${prod.tipo}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display font-bold text-xl text-white">${prod.titulo}</h3>
+                            <p class="text-xs text-zinc-400 mt-1">${prod.medidas}</p>
+                            <div class="mt-4 flex items-baseline gap-1">
+                                <span class="font-display font-extrabold text-2xl text-white">$${prod.precio}</span>
+                                <span class="text-xs font-grotesk text-zinc-400">MXN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <button onclick="apartarProducto('${prod.titulo}', ${prod.precio})" class="w-full py-3.5 px-5 rounded-2xl bg-zinc-900 hover:bg-nova-peach hover:text-zinc-950 border border-nova-border hover:border-nova-peach text-white font-grotesk font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                            <span>Comprar / Apartar</span>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        /* ===================================================================
+           5. MODAL DE DETALLE DE OBRA
+        =================================================================== */
+        function abrirModal(obra) {
+            const modal = document.getElementById("artwork-modal");
+            document.getElementById("modal-img").src = obra.imagen;
+            document.getElementById("modal-img").alt = obra.titulo;
+            document.getElementById("modal-category").textContent = obra.categoriaLabel;
+
+            const statusEl = document.getElementById("modal-status");
+            statusEl.textContent = obra.estado;
+            statusEl.className = `px-3 py-1 rounded-full text-xs font-grotesk font-bold ${obtenerEstiloEstado(obra.estado)}`;
+
+            document.getElementById("modal-title").textContent = obra.titulo;
+            document.getElementById("modal-tech").textContent = obra.tecnica;
+            document.getElementById("modal-story").textContent = obra.historia;
+
+            const interestBtn = document.getElementById("modal-interest-btn");
+            interestBtn.onclick = () => {
+                cerrarModal();
+                const descInput = document.getElementById("commission-desc");
+                descInput.value = `Hola NOVAIX, me encantó tu obra "${obra.titulo}" (${obra.tecnica}). Me gustaría adquirirla o pedir una comisión con un estilo similar.`;
+                actualizarCotizacion();
+                document.getElementById("formulario-comision").scrollIntoView({ behavior: "smooth" });
+                mostrarToast("Solicitud pre-llenada en el formulario");
+            };
+
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            document.body.style.overflow = "hidden";
+            lucide.createIcons();
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById("artwork-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            document.body.style.overflow = "";
+        }
+
+        /* ===================================================================
+           6. COTIZADOR DE COMISIONES, APARTADO DE TIENDA Y COPIADO
+        =================================================================== */
+        function seleccionarPaquete(nombrePaquete) {
+            const select = document.getElementById("commission-package");
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === nombrePaquete) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+            actualizarCotizacion();
+            document.getElementById("formulario-comision").scrollIntoView({ behavior: "smooth" });
+        }
+
+        function actualizarCotizacion() {
+            const nombre = document.getElementById("client-name").value.trim() || "[Tu Nombre]";
+            const pkgSelect = document.getElementById("commission-package");
+            const paquete = pkgSelect.value;
+            const precioBase = parseInt(pkgSelect.options[pkgSelect.selectedIndex].getAttribute("data-price") || "0", 10);
+
+            const estilo = document.getElementById("commission-style").value;
+
+            const extraSelect = document.getElementById("extra-character");
+            const extraTexto = extraSelect.value;
+            const precioExtra = parseInt(extraSelect.options[extraSelect.selectedIndex].getAttribute("data-extra") || "0", 10);
+
+            const total = precioBase + precioExtra;
+            document.getElementById("precio-estimado").textContent = `$${total} MXN`;
+
+            const descripcion = document.getElementById("commission-desc").value.trim() || "Me gustaría cotizar una ilustración personalizada.";
+
+            const mensaje = `¡Hola NOVAIX! ✨ Soy ${nombre} y me gustaría solicitar una comisión:\n• Paquete: ${paquete}\n• Estilo/Técnica: ${estilo}\n• Opciones: ${extraTexto}\n• Estimado web: $${total} MXN\n• Idea: ${descripcion}`;
+
+            document.getElementById("message-preview").textContent = mensaje;
+            return mensaje;
+        }
+
+        function enviarWhatsApp() {
+            const mensaje = actualizarCotizacion();
+            const url = `https://wa.me/${CONFIG_NOVAIX.whatsappNumero}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, "_blank", "noopener,noreferrer");
+        }
+
+        function enviarCorreo() {
+            const mensaje = actualizarCotizacion();
+            const asunto = "Nueva Solicitud de Comisión - Portafolio NOVAIX";
+            const url = `mailto:${CONFIG_NOVAIX.correoContacto}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
+            window.location.href = url;
+        }
+
+        function apartarProducto(titulo, precio) {
+            const mensaje = `¡Hola NOVAIX! ✨ Me interesa comprar/apartar de tu tienda:\n• Pieza: ${titulo}\n• Precio: $${precio} MXN\n¿Sigue disponible para realizar la transferencia SPEI?`;
+            copiarTextoAlPortapapeles(mensaje, "Mensaje de apartado copiado. ¡Te llevamos a Pagos!");
+            setTimeout(() => {
+                document.getElementById("pagos").scrollIntoView({ behavior: "smooth" });
+            }, 900);
+        }
+
+        function copiarSolicitud() {
+            const mensaje = actualizarCotizacion();
+            copiarTextoAlPortapapeles(mensaje, "Solicitud de comisión copiada al portapapeles");
+        }
+
+        function copiarDatoBancario(elementId, etiqueta) {
+            const texto = document.getElementById(elementId).textContent.trim();
+            copiarTextoAlPortapapeles(texto, `${etiqueta} copiada: ${texto}`);
+        }
+
+        /* Función segura de copiado compatible con iframes y móviles */
+        function copiarTextoAlPortapapeles(texto, mensajeToast) {
+            const tempInput = document.createElement("textarea");
+            tempInput.value = texto;
+            tempInput.style.position = "fixed";
+            tempInput.style.opacity = "0";
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+            try {
+                document.execCommand("copy");
+                mostrarToast(mensajeToast);
+            } catch (err) {
+                mostrarToast("No se pudo copiar automáticamente");
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        let toastTimeout;
+        function mostrarToast(texto) {
+            const toast = document.getElementById("toast-notification");
+            document.getElementById("toast-message").textContent = texto;
+            toast.classList.remove("translate-y-24", "opacity-0");
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add("translate-y-24", "opacity-0");
+            }, 3200);
+        }
+    </script>
+</body>
+</html>
