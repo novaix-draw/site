@@ -436,31 +436,165 @@
         </div>
     </section>
 
-    <!-- 6. PAGOS & APOYO -->
+    <!-- 6. PAGOS & APOYO AL ARTE -->
     <section id="pagos" class="py-20 bg-zinc-950/60 border-t border-nova-border/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-grotesk uppercase tracking-widest text-nova-cyan font-bold">Métodos de Pago</span>
-                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">Pagos &amp; Apoyo Directo</h2>
-                <p class="text-zinc-400 mt-2 text-sm sm:text-base">
-                    Actualiza los datos bancarios y enlaces en <code class="text-nova-mint">CONFIG_NOVAIX</code> al final del archivo.
+            <!-- Encabezado -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-grotesk uppercase tracking-[0.22em] text-nova-mint font-bold">
+                    TRANSPARENCIA &amp; COMUNIDAD
+                </span>
+                <h2 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white mt-3 leading-tight">
+                    Pagos &amp; Apoyo al Arte
+                </h2>
+                <p class="text-zinc-400 mt-4 text-sm sm:text-base leading-relaxed">
+                    Puedes pagar tus comisiones u obras mediante transferencia bancaria directa (SPEI) o apoyar mi proceso creativo mensualmente en Patreon.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div class="bg-nova-card border border-nova-border rounded-3xl p-6">
-                    <h3 class="font-display font-bold text-xl text-white">Transferencia / SPEI</h3>
-                    <p class="text-sm text-zinc-400 mt-2">Banco: <span id="banco-nombre" class="text-zinc-200">Por configurar</span></p>
-                    <p class="text-sm text-zinc-400 mt-1">CLABE: <span id="clabe-numero" class="text-nova-mint font-mono">000000000000000000</span></p>
+            <!-- Grid de 2 columnas -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Columna Izquierda: Transferencia Bancaria (SPEI) -->
+                <div class="lg:col-span-7 bg-[#121216] border border-nova-border rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl">
+                    <div>
+                        <!-- Cabecera SPEI -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-nova-border/80">
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-11 h-11 rounded-2xl bg-nova-mint/10 border border-nova-mint/25 flex items-center justify-center text-nova-mint">
+                                    <i data-lucide="landmark" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-display font-bold text-xl sm:text-2xl text-white">
+                                        Transferencia Bancaria (SPEI)
+                                    </h3>
+                                    <p class="text-xs text-zinc-400 mt-0.5">Pagos directos en Pesos Mexicanos (MXN)</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">
+                                Sin comisiones extra
+                            </span>
+                        </div>
+
+                        <!-- Banco y Titular -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+                            <div>
+                                <span class="block text-[11px] font-grotesk uppercase tracking-wider text-zinc-500">
+                                    BANCO / INSTITUCIÓN
+                                </span>
+                                <span id="pago-banco" class="block font-display font-bold text-lg text-white mt-1">
+                                    Nu
+                                </span>
+                            </div>
+                            <div>
+                                <span class="block text-[11px] font-grotesk uppercase tracking-wider text-zinc-500">
+                                    TITULAR DE LA CUENTA
+                                </span>
+                                <span id="pago-titular" class="block font-display font-bold text-lg text-white mt-1">
+                                    Itzel Xahli Pérez
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- CLABE Interbancaria -->
+                        <div class="mt-6">
+                            <span class="block text-[11px] font-grotesk uppercase tracking-wider text-zinc-500 mb-2">
+                                CLABE INTERBANCARIA (18 DÍGITOS)
+                            </span>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#0c0c0f] border border-nova-border rounded-2xl px-4 py-3.5">
+                                <span id="pago-clabe" class="font-mono text-base sm:text-lg tracking-wider text-white select-all">
+                                    638180010001176370
+                                </span>
+                                <button
+                                    type="button"
+                                    onclick="copiarDatoPago('pago-clabe', 'CLABE copiada al portapapeles')"
+                                    class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-nova-mint/15 hover:bg-nova-mint/25 border border-nova-mint/40 text-nova-mint font-grotesk font-bold text-xs sm:text-sm transition-colors shrink-0"
+                                >
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                    <span>Copiar CLABE</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Número de Tarjeta / Cuenta -->
+                        <div class="mt-5">
+                            <span class="block text-[11px] font-grotesk uppercase tracking-wider text-zinc-500 mb-2">
+                                NÚMERO DE TARJETA / CUENTA
+                            </span>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#0c0c0f] border border-nova-border rounded-2xl px-4 py-3.5">
+                                <span id="pago-tarjeta" class="font-mono text-base sm:text-lg tracking-widest text-white select-all">
+                                    5101 2591 2412 3471
+                                </span>
+                                <button
+                                    type="button"
+                                    onclick="copiarDatoPago('pago-tarjeta', 'Número de tarjeta copiado')"
+                                    class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-zinc-800/90 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 font-grotesk font-bold text-xs sm:text-sm transition-colors shrink-0"
+                                >
+                                    <i data-lucide="copy" class="w-4 h-4"></i>
+                                    <span>Copiar Tarjeta</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instrucción importante -->
+                    <div class="mt-6 bg-nova-lavender/10 border border-nova-lavender/25 rounded-2xl p-4 flex items-start gap-3">
+                        <i data-lucide="info" class="w-5 h-5 text-nova-lavender shrink-0 mt-0.5"></i>
+                        <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                            <strong class="text-white font-semibold">Instrucción importante:</strong> Al transferir, coloca tu nombre en el concepto y
+                            <strong class="text-nova-lavender font-semibold">envía tu comprobante con tu nombre o concepto</strong> por WhatsApp o Instagram para confirmar tu pedido o apartar tu obra.
+                        </p>
+                    </div>
                 </div>
 
-                <div class="bg-nova-card border border-nova-border rounded-3xl p-6">
-                    <h3 class="font-display font-bold text-xl text-white">Patreon &amp; Apoyo</h3>
-                    <p class="text-sm text-zinc-400 mt-2">Acompaña nuevos bocetos, procesos y lanzamientos.</p>
-                    <a id="patreon-link" href="https://patreon.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-4 px-4 py-2.5 rounded-xl bg-nova-lavender text-zinc-950 font-grotesk font-bold text-sm">
-                        <span>Visitar Patreon</span>
-                        <i data-lucide="external-link" class="w-4 h-4"></i>
-                    </a>
+                <!-- Columna Derecha: Apoya mi arte en Patreon -->
+                <div class="lg:col-span-5 relative rounded-3xl p-[1.5px] bg-gradient-to-b from-nova-lavender/60 via-nova-peach/40 to-nova-mint/60 shadow-2xl">
+                    <div class="h-full bg-gradient-to-b from-[#1a1426] via-[#13121a] to-[#0f171a] rounded-[23px] p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-nova-peach/15 border border-nova-peach/30 text-nova-peach text-xs font-grotesk font-semibold">
+                                <span>♥</span>
+                                <span>Comunidad Exclusiva</span>
+                            </span>
+
+                            <h3 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-5 leading-tight">
+                                Apoya mi arte en Patreon
+                            </h3>
+
+                            <p class="text-sm text-zinc-300 mt-4 leading-relaxed">
+                                Únete a mi espacio creativo para ver el detrás de cámaras de mis proyectos universitarios y personales: bocetos inéditos, timelapses de proceso, wallpapers mensuales y acceso anticipado a obras originales.
+                            </p>
+
+                            <ul class="mt-6 space-y-3.5 text-sm text-zinc-200">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-nova-lavender mt-0.5">✦</span>
+                                    <span>Procesos en video (Timelapses digital y grafito)</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-nova-mint mt-0.5">✦</span>
+                                    <span>Fondos de pantalla descargables en alta calidad</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-nova-cyan mt-0.5">✦</span>
+                                    <span>Descuentos especiales en comisiones y prints</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-8 pt-4 border-t border-white/10 text-center">
+                            <a
+                                id="patreon-link"
+                                href="https://www.patreon.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="w-full py-4 px-6 rounded-2xl bg-gradient-nova text-zinc-950 font-grotesk font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 hover:opacity-95 transition-opacity shadow-lg shadow-nova-lavender/20"
+                            >
+                                <span>Visitar mi Patreon</span>
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                            <p class="text-xs text-zinc-400 mt-3">
+                                ¡Gracias por impulsar el arte independiente!
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -769,6 +903,29 @@
             });
         }
 
+        function copiarDatoPago(elementId, mensajeExito) {
+            const texto = document.getElementById(elementId)?.textContent.trim() || "";
+            if (!texto) return;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(texto)
+                    .then(() => mostrarToast(mensajeExito))
+                    .catch(() => copiarFallback(texto, mensajeExito));
+            } else {
+                copiarFallback(texto, mensajeExito);
+            }
+        }
+
+        function copiarFallback(texto, mensajeExito) {
+            const tempInput = document.createElement("input");
+            tempInput.value = texto;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            mostrarToast(mensajeExito);
+        }
+        
         function enviarWhatsApp() {
             const texto = encodeURIComponent(construirMensaje());
             window.open(`https://wa.me/${CONFIG_NOVAIX.whatsapp}?text=${texto}`, "_blank", "noopener,noreferrer");
