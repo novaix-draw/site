@@ -142,14 +142,12 @@
                     </h1>
 
                     <p class="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Hola, soy <strong class="text-white font-semibold">NOVAIX</strong>. Artista visual y estudiante de Diseño de la Comunicación Gráfica. Creo ilustraciones tradicionales en <span class="text-zinc-200">grafito, pintura vinílica, arte digital y diseño de personajes</span> llenos de expresión y color.
+                        Hola, soy <strong class="text-white font-semibold">NOVAIX</strong>. Artista visual y estudiante de Diseño de la Comunicación Gráfica. Creo ilustraciones tradicionales en <span class="text-zinc-200">grafito y arte digital</span> llenos de expresión y color.
                     </p>
 
                     <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-1">
                         <span class="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">✦ Ilustración Digital</span>
-                        <span class="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">✦ Pintura Vinílica</span>
                         <span class="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">✦ Grafito</span>
-                        <span class="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-grotesk text-zinc-300">✦ Character Design</span>
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
@@ -216,9 +214,6 @@
                     </button>
                     <button type="button" data-filter="clasica" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-grotesk font-medium bg-nova-card border border-nova-border text-zinc-300 hover:border-nova-mint transition-all">
                         Técnica Clásica
-                    </button>
-                    <button type="button" data-filter="personajes" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-grotesk font-medium bg-nova-card border border-nova-border text-zinc-300 hover:border-nova-peach transition-all">
-                        Diseño de Personajes
                     </button>
                 </div>
             </div>
@@ -313,30 +308,6 @@
                         Elegir este paquete
                     </button>
                 </div>
-
-                <div class="bg-nova-card border border-nova-border rounded-3xl p-6 flex flex-col justify-between glow-card transition-all">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded-full bg-nova-peach/15 text-nova-peach text-xs font-grotesk">Concept Art</span>
-                            <i data-lucide="user-check" class="w-5 h-5 text-nova-peach"></i>
-                        </div>
-                        <h3 class="font-display font-bold text-xl text-white">Diseño de Personaje</h3>
-                        <div class="mt-3 flex items-baseline gap-1">
-                            <span class="font-display font-extrabold text-3xl text-nova-peach">$800</span>
-                            <span class="text-xs text-zinc-400 font-grotesk">MXN</span>
-                        </div>
-                        <p class="text-xs text-zinc-400 mt-1">Entrega estimada: 5 a 10 días hábiles</p>
-                        <ul class="mt-5 space-y-2.5 text-sm text-zinc-300">
-                            <li class="flex items-start gap-2"><span class="text-nova-peach">✓</span> Cuerpo completo + 2 expresiones</li>
-                            <li class="flex items-start gap-2"><span class="text-nova-peach">✓</span> Paleta de color y vestuario</li>
-                            <li class="flex items-start gap-2"><span class="text-nova-peach">✓</span> Hoja de referencia (Character Sheet)</li>
-                            <li class="flex items-start gap-2"><span class="text-nova-peach">✓</span> Ideal para creadores, libros o juegos</li>
-                        </ul>
-                    </div>
-                    <button type="button" onclick="seleccionarPaquete('Diseño de Personaje ($800 MXN)')" class="mt-6 w-full py-3 rounded-xl bg-zinc-900 border border-nova-border hover:border-nova-peach text-white font-grotesk font-bold text-sm transition-colors">
-                        Elegir este paquete
-                    </button>
-                </div>
             </div>
 
             <!-- Generador de Pedido -->
@@ -365,7 +336,6 @@
                                 <option value="Boceto / Lineart ($250 MXN)" data-price="250">Boceto / Lineart — $250 MXN</option>
                                 <option value="Ilustración Digital a Color ($450 MXN)" data-price="450" selected>Ilustración Digital a Color — $450 MXN</option>
                                 <option value="Obra Tradicional en Papel ($650 MXN)" data-price="650">Obra Tradicional en Papel — $650 MXN</option>
-                                <option value="Diseño de Personaje ($800 MXN)" data-price="800">Diseño de Personaje — $800 MXN</option>
                             </select>
                         </div>
                     </div>
@@ -375,8 +345,8 @@
                             <label for="commission-style" class="block text-xs font-grotesk uppercase tracking-wider text-zinc-400 mb-2">Estilo / Técnica</label>
                             <select id="commission-style" class="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-nova-border text-white focus:outline-none focus:border-nova-lavender transition-colors">
                                 <option value="Digital Colorido / Editorial">Digital Colorido / Editorial</option>
-                                <option value="Tinta Negra y Achurado Clásico">Tinta Negra y Achurado Clásico</option>
-                                <option value="Acuarela y Lápices de Color">Acuarela y/o Lápices de Color</option>
+                                <option value="Tinta Negra y Achurado Clásico">Grafito Clásico</option>
+                                <option value="Acuarela y Lápices de Color">Grafito a Color</option>
                                 <option value="Grafito / Carboncillo Realista">Grafito / Carboncillo Realista</option>
                             </select>
                         </div>
@@ -490,7 +460,7 @@
                                     TITULAR DE LA CUENTA
                                 </span>
                                 <span id="pago-titular" class="block font-display font-bold text-lg text-white mt-1">
-                                    Itzel Xahli Pérez
+                                    Itzel X. Pérez Correa
                                 </span>
                             </div>
                         </div>
@@ -672,27 +642,27 @@
             },
             {
                 id: "obra-02",
-                titulo: "Estudio en Grafito 02",
-                categoria: "clasica",
-                tecnica: "Grafito sobre papel",
-                precio: "$650 MXN",
+                titulo: "Lain Iwakura",
+                categoria: "digital",
+                tecnica: "Ilustración Digital",
+                precio: "$450 MXN",
                 estado: "Disponible",
                 imagen: "02.jpg",
-                descripcion: "Estudio tradicional de luces y sombras a lápiz de grafito."
+                descripcion: "Ilustración con iluminación y acabado digital."
             },
             {
                 id: "obra-03",
-                titulo: "Concepto de Personaje 03",
-                categoria: "personajes",
-                tecnica: "Character Design Digital",
-                precio: "$800 MXN",
+                titulo: "Batter & Judge",
+                categoria: "digital",
+                tecnica: "Ilustración Digital",
+                precio: "$450 MXN",
                 estado: "Disponible",
                 imagen: "03.jpg",
-                descripcion: "Diseño original de personaje con paleta cromática y poses."
+                descripcion: "Ilustración con iluminación y acabado digital."
             },
             {
                 id: "obra-04",
-                titulo: "Lorenzo & Rachel Waterman",
+                titulo: "Vash the Stampede",
                 categoria: "digital",
                 tecnica: "Ilustración Digital",
                 precio: "$450 MXN",
@@ -702,27 +672,27 @@
             },
             {
                 id: "obra-05",
-                titulo: "Estudio en Grafito 02",
-                categoria: "clasica",
-                tecnica: "Grafito sobre papel",
-                precio: "$650 MXN",
+                titulo: "Athena Asamiya",
+                categoria: "digital",
+                tecnica: "Ilustración Digital",
+                precio: "$450 MXN",
                 estado: "Disponible",
                 imagen: "05.jpg",
-                descripcion: "Estudio tradicional de luces y sombras a lápiz de grafito."
+                descripcion: "Ilustración con iluminación y acabado digital."
             },
             {
                 id: "obra-06",
-                titulo: "Concepto de Personaje 03",
-                categoria: "personajes",
-                tecnica: "Character Design Digital",
-                precio: "$800 MXN",
+                titulo: "The Courier",
+                categoria: "digital",
+                tecnica: "Ilustración Digital",
+                precio: "$450 MXN",
                 estado: "Disponible",
                 imagen: "06.jpg",
-                descripcion: "Diseño original de personaje con paleta cromática y poses."
+                descripcion: "Ilustración con iluminación y acabado digital."
             },
             {
                 id: "obra-07",
-                titulo: "Lorenzo & Rachel Waterman",
+                titulo: "Lady Oscar",
                 categoria: "digital",
                 tecnica: "Ilustración Digital",
                 precio: "$450 MXN",
@@ -732,38 +702,38 @@
             },
             {
                 id: "obra-08",
-                titulo: "Estudio en Grafito 02",
-                categoria: "clasica",
-                tecnica: "Grafito sobre papel",
-                precio: "$650 MXN",
-                estado: "Disponible",
-                imagen: "08.jpg",
-                descripcion: "Estudio tradicional de luces y sombras a lápiz de grafito."
-            },
-            {
-                id: "obra-09",
-                titulo: "Concepto de Personaje 03",
-                categoria: "personajes",
-                tecnica: "Character Design Digital",
-                precio: "$800 MXN",
-                estado: "Disponible",
-                imagen: "09.jpg",
-                descripcion: "Diseño original de personaje con paleta cromática y poses."
-            },
-            {
-                id: "obra-10",
-                titulo: "Lorenzo & Rachel Waterman",
+                titulo: "Sebastian Solace I",
                 categoria: "digital",
                 tecnica: "Ilustración Digital",
                 precio: "$450 MXN",
                 estado: "Disponible",
-                imagen: "10.jpg",
+                imagen: "08.jpg",
                 descripcion: "Ilustración con iluminación y acabado digital."
             },
             {
+                id: "obra-09",
+                titulo: "Sebastian Solace II",
+                categoria: "digital",
+                tecnica: "Ilustración Digital",
+                precio: "$450 MXN",
+                estado: "Disponible",
+                imagen: "09.jpg",
+                descripcion: "Ilustración con iluminación y acabado digital."
+            },
+            {
+                id: "obra-10",
+                titulo: "Kirby Warpstar",
+                categoria: "ilustración tradicional",
+                tecnica: "Tinta de gel blanca sobre cartulina negra A5",
+                precio: "$250 MXN",
+                estado: "Disponible",
+                imagen: "10.jpg",
+                descripcion: "Ilustración original del personaje Kirby en tinta de gel blanca sobre castulina negra formato A5"
+            },
+            {
                 id: "obra-11",
-                titulo: "Estudio en Grafito 02",
-                categoria: "clasica",
+                titulo: "Morrigan Aensland",
+                categoria: "ilustración tradicional",
                 tecnica: "Grafito sobre papel",
                 precio: "$650 MXN",
                 estado: "Disponible",
@@ -772,13 +742,13 @@
             },
             {
                 id: "obra-12",
-                titulo: "Concepto de Personaje 03",
-                categoria: "personajes",
-                tecnica: "Character Design Digital",
-                precio: "$800 MXN",
+                titulo: "Batter",
+                categoria: "ilustración tradicional",
+                tecnica: "Grafito sobre papel",
+                precio: "$650 MXN",
                 estado: "Disponible",
                 imagen: "12.jpg",
-                descripcion: "Diseño original de personaje con paleta cromática y poses."
+                descripcion: "Estudio tradicional de luces y sombras a lápiz de grafito."
             },
             {
                 id: "obra-14",
